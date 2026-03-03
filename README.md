@@ -1,56 +1,56 @@
 # OpenBrain 🧠✨
 
-**OpenBrain** es una interfaz de gestión inteligente diseñada específicamente para **OpenClaw**. Transforma la experiencia de configuración local en un panel de control moderno, fluido y visualmente impactante.
+**OpenBrain** is an intelligent management interface designed specifically for **OpenClaw**. It transforms the local configuration experience into a modern, fluid, and visually stunning control panel.
 
-## ✨ Características Principales
+## ✨ Key Features
 
-- **Arquitectura SPA (Single Page Application)**: Navegación instantánea entre secciones sin recargas de página.
-- **Dashboard de Métricas**: Visualización de actividad de tokens, costo estimado y uso por modelo de IA (GPT-4, Claude, Llama, etc.).
-- **Gestión de Skills**: Activa y desactiva tus habilidades instaladas con un solo clic.
-- **Editor JSON Integrado**: Administra tu archivo `openclaw.json` con validación y resaltado de sintaxis.
-- **Control de Backups**: Crea y gestiona puntos de restauración integrales de tu entorno.
-- **Modo Oscuro/Claro**: Interfaz premium adaptable a tus preferencias visuales.
+- **SPA Architecture (Single Page Application)**: Instant navigation between sections without page reloads.
+- **Metrics Dashboard**: Visualization of token activity, estimated cost, and usage by AI model (GPT-4, Claude, Llama, etc.).
+- **Skill Management**: Activate and deactivate your installed skills with a single click.
+- **Integrated JSON Editor**: Manage your `openclaw.json` file with validation and syntax highlighting.
+- **Backup Control**: Create and manage comprehensive restoration points for your environment.
+- **Dark/Light Mode**: Premium interface adaptable to your visual preferences.
 
-## 🚀 Instalación
+## 🚀 Installation
 
-Puedes instalar OpenBrain directamente desde el código fuente:
+You can install OpenBrain directly from the source code:
 
 ```bash
-# Clonar el repositorio
-git clone https://github.com/tu-usuario/openbrain.git
+# Clone the repository
+git clone https://github.com/your-username/openbrain.git
 cd openbrain
 
-# Instalar el paquete en modo editable
+# Install the package in editable mode
 pip install -e .
 ```
 
-## 🛠️ Uso
+## 🛠️ Usage
 
-OpenBrain incluye una interfaz de línea de comandos (CLI) extremadamente sencilla:
+OpenBrain includes an extremely simple Command Line Interface (CLI):
 
-### Iniciar el Servidor Web
+### Start the Web Server
 ```bash
 openbrain start
 ```
-Luego abre tu navegador en `http://localhost:5050`.
+Then open your browser at `http://localhost:5050`.
 
-### Ver Estado del Sistema
+### Check System Status
 ```bash
 openbrain status
 ```
 
-### Crear un Backup Manual
+### Create a Manual Backup
 ```bash
 openbrain backup
 ```
 
-## 📁 Estructura del Proyecto
+## 📁 Project Structure
 
-- `openbrain/core.py`: Lógica de negocio (configuración, skills, backups, métricas).
-- `openbrain/api.py`: Backend basado en FastAPI.
-- `openbrain/templates.py`: Interfaz de usuario (HTML/JS/Tailwind) con arquitectura SPA.
-- `openbrain/cli.py`: Interfaz de línea de comandos.
+- `openbrain/core.py`: Business logic (config, skills, backups, metrics).
+- `openbrain/api.py`: FastAPI-based backend.
+- `openbrain/templates.py`: User Interface (HTML/JS/Tailwind) with SPA architecture.
+- `openbrain/cli.py`: Command Line Interface.
 
-## 📄 Licencia
+## 📄 License
 
-Este proyecto está bajo la Licencia MIT.
+This project is licensed under the MIT License.
