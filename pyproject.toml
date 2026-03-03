@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openbrain"
+version = "1.0.0"
+description = "Intelligent OpenClaw manager with SPA interface and token metrics"
+authors = [
+    { name = "OpenBrain Contributor" }
+]
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "pydantic",
+    "python-multipart"
+]
+readme = "README.md"
+requires-python = ">=3.8"
+
+[project.scripts]
+openbrain = "openbrain.cli:app"
