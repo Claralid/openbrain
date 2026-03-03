@@ -53,4 +53,9 @@ openbrain backup
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+OpenBrain is released under a Community License.
+
+You are free to use it for personal and internal business purposes.
+Commercial use, resale, or offering it as a hosted service is not permitted without explicit authorization.
+
+For commercial licensing inquiries, please open an issue in this repository.
