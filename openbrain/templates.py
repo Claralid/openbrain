@@ -470,22 +470,58 @@ HTML_TEMPLATE = """
                 return;
             }
             
-            list.innerHTML = data.backups.map(b => `
+            list.innerHTML = data.backups.map(b => {
+                // Parse date from filename: backup_YYYYMMDD_HHMMSS.zip
+                let dateStr = "Unknown Date";
+                const match = b.name.match(/backup_(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})(\d{2})/);
+                if (match) {
+                    const [_, year, month, day, hour, min, sec] = match;
+                    dateStr = `${day}/${month}/${year} ${hour}:${min}`;
+                }
+
+                return `
                 <div class="p-6 flex items-center justify-between hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-all group">
                     <div class="flex items-center gap-4">
                         <div class="w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center text-gray-400 group-hover:text-emerald-500 transition-colors">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
                         </div>
                         <div>
-                            <p class="text-sm font-bold text-gray-800 dark:text-gray-200">${b.name}</p>
-                            <p class="text-[10px] font-black text-gray-400 dark:text-gray-600 uppercase tracking-widest">${b.size}</p>
+                            <p class="text-sm font-bold text-gray-800 dark:text-gray-200">${dateStr}</p>
+                            <p class="text-[10px] font-black text-gray-400 dark:text-gray-600 uppercase tracking-widest">${b.name} • ${b.size}</p>
                         </div>
                     </div>
-                    <button onclick="deleteBackup('${b.name}')" class="p-2 text-gray-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all opacity-0 group-hover:opacity-100">
-                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                    </button>
-                </div>
-            `).join('');
+                    <div class="flex items-center gap-2">
+                        <button onclick="deleteBackup('${b.name}')" class="p-2 text-gray-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all opacity-0 group-hover:opacity-100">
+                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                        </button>
+                    </div>
+                </div>`;
+            }).join('');
+
+            // Add Restore Guide at the end of the list if it doesn't exist
+            if (!document.getElementById('restore-guide')) {
+                const guide = document.createElement('div');
+                guide.id = 'restore-guide';
+                guide.className = 'p-8 bg-emerald-50/50 dark:bg-emerald-900/10 border-t border-gray-100 dark:border-gray-800';
+                guide.innerHTML = `
+                    <h4 class="text-xs font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-4">Restore Guide</h4>
+                    <div class="space-y-3">
+                        <p class="text-xs text-gray-600 dark:text-gray-400 flex items-start gap-2">
+                            <span class="font-bold text-emerald-500">1.</span>
+                            <span>Unzip the backup file into a temporary directory.</span>
+                        </p>
+                        <p class="text-xs text-gray-600 dark:text-gray-400 flex items-start gap-2">
+                            <span class="font-bold text-emerald-500">2.</span>
+                            <span>Copy the contents (openclaw.json, skills/, etc.) to your <b>~/.openclaw</b> directory.</span>
+                        </p>
+                        <p class="text-xs text-gray-600 dark:text-gray-400 flex items-start gap-2">
+                            <span class="font-bold text-emerald-500">3.</span>
+                            <span>Restart OpenBrain to see the changes applied.</span>
+                        </p>
+                    </div>
+                `;
+                list.parentElement.appendChild(guide);
+            }
         }
 
         async function createBackup() {
