@@ -1,75 +1,61 @@
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
+from pydantic import BaseModel
+import traceback
+
 from .core import (
-    ensure_structure, get_config, save_config, get_skills,
-    toggle_skill, get_backups, create_manual_backup, delete_backup,
-    get_metrics
+    get_memory_tree, read_memory_file, 
+    save_memory_file, create_memory_node
 )
 from .templates import HTML_TEMPLATE
 
-# Aseguramos la estructura en el inicio
-ensure_structure()
+app = FastAPI(title="OpenBrain Workspace Memory API")
 
-app = FastAPI(title="OpenBrain API")
+class SaveRequest(BaseModel):
+    path: str
+    content: str
 
-@app.get("/api/config")
-def api_get_config():
+class CreateRequest(BaseModel):
+    parent: str
+    name: str
+    is_folder: bool
+
+@app.get("/api/memory")
+def api_get_memory():
     try:
-        return get_config()
+        return {"tree": get_memory_tree()}
+    except Exception as e:
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/memory/file")
+def api_read_file(path: str):
+    try:
+        return {"content": read_memory_file(path)}
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Archivo no encontrado")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/api/metrics")
-def api_get_metrics():
+@app.post("/api/memory/file")
+def api_save_file(request: SaveRequest):
     try:
-        return get_metrics()
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-@app.post("/api/config")
-async def api_save_config(request: Request):
-    try:
-        data = await request.json()
-        save_config(data)
-        return {"message": "Configuración guardada exitosamente"}
+        save_memory_file(request.path, request.content)
+        return {"message": "Guardado exitosamente"}
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/api/skills")
-def api_get_skills():
-    return {"skills": get_skills()}
-
-@app.post("/api/skills/toggle")
-async def api_toggle_skill(request: Request):
-    data = await request.json()
-    skill_name = data.get("name")
+@app.post("/api/memory/create")
+def api_create_node(req: CreateRequest):
     try:
-        status = toggle_skill(skill_name)
-        return {"message": f"Skill {'activado' if status else 'desactivado'}", "active": status}
+        created_path = create_memory_node(req.parent, req.name, req.is_folder)
+        return {"message": "Creado exitosamente", "path": created_path}
     except ValueError as e:
-        raise HTTPException(status_code=404, detail=str(e))
-
-@app.get("/api/backups")
-def api_get_backups():
-    return {"backups": get_backups()}
-
-@app.post("/api/backups")
-def api_create_backup():
-    try:
-        create_manual_backup()
-        return {"message": "Backup creado exitosamente"}
+        raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-@app.delete("/api/backups/{filename}")
-def api_delete_backup(filename: str):
-    try:
-        if delete_backup(filename):
-            return {"message": "Backup eliminado"}
-        raise HTTPException(status_code=404, detail="Archivo no encontrado")
-    except Exception as e:
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/", response_class=HTMLResponse)
