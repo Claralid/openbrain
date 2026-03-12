@@ -1,4 +1,5 @@
 import os
+import shutil
 
 # Base Directory: Current working directory (where openbrain is started)
 WORKSPACE_DIR = os.environ.get("OPENBRAIN_WORKSPACE", os.getcwd())
@@ -126,3 +127,41 @@ def create_memory_node(parent_dir, name, is_folder):
                 f.write(f"\n- [{name_clean}](./{file_name})\n")
                 
         return os.path.relpath(file_path, WORKSPACE_DIR)
+
+def delete_memory_node(rel_path):
+    path = resolve_path(rel_path)
+    if not os.path.exists(path):
+        raise ValueError("El archivo o sección no existe.")
+        
+    if os.path.isdir(path):
+        shutil.rmtree(path)
+    else:
+        os.remove(path)
+        
+def rename_memory_node(rel_path, new_name):
+    path = resolve_path(rel_path)
+    if not os.path.exists(path):
+        raise ValueError("El archivo o sección no existe.")
+        
+    parent_dir = os.path.dirname(path)
+    is_folder = os.path.isdir(path)
+    old_basename = os.path.basename(path)
+    
+    if is_folder:
+        new_path = os.path.join(parent_dir, new_name)
+        if os.path.exists(new_path): raise ValueError("Ya existe una carpeta con ese nombre.")
+        os.rename(path, new_path)
+        
+        # Rename internal index if it exists
+        old_index = os.path.join(new_path, f"{old_basename}_index.md")
+        if os.path.exists(old_index):
+            new_index = os.path.join(new_path, f"{new_name}_index.md")
+            os.rename(old_index, new_index)
+            
+        return os.path.relpath(new_path, WORKSPACE_DIR)
+    else:
+        new_file_name = f"{new_name}.md" if not new_name.endswith(".md") else new_name
+        new_path = os.path.join(parent_dir, new_file_name)
+        if os.path.exists(new_path): raise ValueError("Ya existe un archivo con ese nombre.")
+        os.rename(path, new_path)
+        return os.path.relpath(new_path, WORKSPACE_DIR)
