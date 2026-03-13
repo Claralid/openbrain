@@ -82,7 +82,11 @@ HTML_TEMPLATE = r"""
                     <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                     <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
                 </button>
-                <button onclick="openSettings()" class="p-2 text-gray-400 hover:text-emerald-500 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800" title="Configuración y Mantenimiento">
+                <div class="h-6 w-px bg-gray-200 dark:bg-gray-800"></div>
+                <button onclick="openAgentSettings()" class="p-2 text-gray-400 hover:text-emerald-500 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800" title="Configurar Agente de Memoria">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"></path></svg>
+                </button>
+                <button onclick="openSettings()" class="p-2 text-gray-400 hover:text-emerald-500 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800" title="Mantenimiento del Sistema">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                 </button>
                 <div class="h-6 w-px bg-gray-200 dark:bg-gray-800"></div>
@@ -143,6 +147,43 @@ HTML_TEMPLATE = r"""
             <div class="flex justify-end gap-3">
                 <button onclick="closeDeleteModal()" class="px-5 py-2.5 text-sm font-bold text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">Cancelar</button>
                 <button onclick="submitDelete()" class="px-5 py-2.5 bg-red-500 text-white text-sm font-bold rounded-xl hover:bg-red-600 shadow-lg shadow-red-500/20 transition-all active:scale-95">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Agent Settings -->
+    <div id="agent-settings-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-gray-50 dark:bg-gray-950 rounded-2xl w-full max-w-2xl shadow-2xl border border-gray-200 dark:border-gray-800 transform transition-all flex flex-col md:flex-row overflow-hidden max-h-[85vh]">
+            <!-- Sidebar / Nav Modules -->
+            <div class="w-full md:w-1/3 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 p-6 flex flex-col gap-2 shrink-0">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Agent Settings</h3>
+                <nav class="space-y-1">
+                    <button class="w-full text-left px-4 py-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 font-bold transition-colors flex items-center gap-3">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+                        Voice Settings
+                    </button>
+                    <!-- Próximamente -->
+                    <button disabled class="w-full text-left px-4 py-2.5 rounded-xl text-gray-400 dark:text-gray-600 font-medium flex items-center gap-3 cursor-not-allowed" title="Próximamente para el usuario">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Personality
+                    </button>
+                    <button disabled class="w-full text-left px-4 py-2.5 rounded-xl text-gray-400 dark:text-gray-600 font-medium flex items-center gap-3 cursor-not-allowed" title="Próximamente para el usuario">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        Behavior
+                    </button>
+                </nav>
+            </div>
+            
+            <!-- Main Config Area -->
+            <div class="flex-1 flex flex-col relative bg-transparent overflow-y-auto">
+                <div class="absolute top-4 right-4 relative z-10 flex justify-end p-4 pb-0">
+                    <button onclick="closeAgentSettings()" class="p-1 text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors rounded-lg bg-gray-100 dark:bg-gray-800/80">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+                <div class="flex-1 p-6 lg:p-10 pt-4" id="agent-settings-content">
+                    <div class="text-center text-sm text-gray-500 py-10">Conectando módulos de IA...</div>
+                </div>
             </div>
         </div>
     </div>
@@ -614,6 +655,69 @@ HTML_TEMPLATE = r"""
             document.documentElement.classList.add('dark');
         } else {
             document.documentElement.classList.remove('dark');
+        }
+
+        async function openAgentSettings() {
+            document.getElementById('agent-settings-modal').classList.remove('hidden');
+            const content = document.getElementById('agent-settings-content');
+            
+            try {
+                const res = await fetch('/api/agent/settings');
+                const data = await res.json();
+                
+                content.innerHTML = `
+                    <div class="mb-6">
+                        <h4 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Canal Vocal Actual</h4>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Verifica el estado de los puentes de audio operacionales de OpenBrain hacia el chat.</p>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden mb-8">
+                        <div class="p-5 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-blue-500 flex items-center justify-center shrink-0 border border-blue-100 dark:border-blue-900/50">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+                                </div>
+                                <div>
+                                    <span class="block text-sm font-bold text-gray-900 dark:text-white leading-tight">Speech-to-Text (Escucha)</span>
+                                    <span class="block text-xs text-gray-500">Transforma tus notas de voz en texto</span>
+                                </div>
+                            </div>
+                            <span class="px-2.5 py-1 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md text-xs font-bold text-gray-600 dark:text-gray-300 shadow-inner">${data.voice.stt_provider}</span>
+                        </div>
+                        
+                        <div class="p-5 flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 text-emerald-500 flex items-center justify-center shrink-0 border border-emerald-100 dark:border-emerald-900/50">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                                </div>
+                                <div>
+                                    <span class="block text-sm font-bold text-gray-900 dark:text-white leading-tight">Text-to-Speech (Habla)</span>
+                                    <span class="block text-xs text-gray-500">El motor principal con el que interactúa</u></span>
+                                </div>
+                            </div>
+                            <span class="px-2.5 py-1 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md text-xs font-bold text-gray-600 dark:text-gray-300 shadow-inner">${data.voice.tts_provider}</span>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3">Health / Delivery</span>
+                        <div class="bg-gray-900 dark:bg-black rounded-xl p-4 border border-gray-800 relative z-0 flex items-center justify-between shadow-lg">
+                            <div>
+                                <span class="text-emerald-400 font-bold text-sm bg-emerald-500/10 px-2.5 py-1 rounded border border-emerald-500/20 flex items-center gap-2 inline-flex mb-1">
+                                     <div class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div> ${data.voice.status}
+                                </span>
+                                <span class="block text-[11px] text-gray-400 mt-1">${data.voice.description}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } catch (err) {
+                content.innerHTML = `<span class="text-sm text-red-500">Error cargando módulos del agente.</span>`;
+            }
+        }
+
+        function closeAgentSettings() {
+            document.getElementById('agent-settings-modal').classList.add('hidden');
         }
 
         async function openSettings() {

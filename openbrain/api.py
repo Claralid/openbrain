@@ -130,6 +130,17 @@ def api_system_update():
              raise e
          raise HTTPException(status_code=500, detail=str(e))
 
+@app.get("/api/agent/settings")
+def api_agent_settings():
+    return {
+        "voice": {
+            "stt_provider": "Whisper",
+            "tts_provider": "KittenTTS",
+            "status": "Online",
+            "description": "Texto → KittenTTS → Auto-Delivery al chat de Telegram"
+        }
+    }
+
 @app.get("/", response_class=HTMLResponse)
 def root():
     return HTML_TEMPLATE
