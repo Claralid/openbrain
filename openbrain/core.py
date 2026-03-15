@@ -5,7 +5,7 @@ import shutil
 WORKSPACE_DIR = os.environ.get("OPENBRAIN_WORKSPACE", os.getcwd())
 
 # Folders to ignore from the brain UI
-IGNORED_FOLDERS = {".git", "venv", "__pycache__", "openbrain", ".openclaw", ".vscode", ".idea"}
+IGNORED_FOLDERS = {".git", "venv", "__pycache__", "openbrain", ".openclaw", ".vscode", ".idea", "Chats"}
 
 def get_memory_tree():
     """ Construye la estructura de carpetas y archivos basándose en el Workspace Actual """

@@ -38,7 +38,7 @@ HTML_TEMPLATE = r"""
 <body class="bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 font-sans flex h-screen overflow-hidden">
     
     <!-- Sidebar -->
-    <aside class="w-72 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col shrink-0 transition-colors duration-300">
+    <aside class="w-72 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col shrink-0 transition-colors duration-300 h-screen overflow-hidden">
         <!-- Logo -->
         <div class="h-16 flex items-center px-6 border-b border-gray-100 dark:border-gray-800 shrink-0">
             <svg class="w-6 h-6 text-emerald-500 mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -52,119 +52,158 @@ HTML_TEMPLATE = r"""
         </div>
 
         <!-- Scrollable Navigation Area -->
-        <div class="flex-1 overflow-y-auto w-full no-scrollbar pb-20">
-            <!-- 1. Personality -->
-            <div class="px-3 pt-4">
-                <button class="w-full flex items-center justify-between px-3 py-2 text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest group">
-                    <span>1. Personality</span>
-                </button>
-                <div class="mt-1 space-y-0.5 px-2">
-                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors opacity-50 cursor-not-allowed" title="Próximamente">
-                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        Identidad
-                    </a>
-                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors opacity-50 cursor-not-allowed" title="Próximamente">
-                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
-                        Tono
-                    </a>
-                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors opacity-50 cursor-not-allowed" title="Próximamente">
-                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
-                        Forma de ser
-                    </a>
+        <div class="flex-1 overflow-y-auto w-full pb-20">
+
+
+            <!-- Top Menu (Notion Style) -->
+            <div class="px-3 pt-4 space-y-0.5">
+                <div class="flex items-center gap-2.5 px-3 py-2 text-sm font-bold text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800/50 rounded-lg cursor-pointer" onclick="showHome()">
+                    <svg class="w-4 h-4 shrink-0 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    Home
                 </div>
+                <!-- Search Button -->
+                <div class="flex items-center gap-2.5 px-3 py-1.5 text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg transition-colors cursor-pointer" onclick="openSearchModal()">
+                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    Search
+                </div>
+                
+                <!-- Outputs -->
+                <a href="#" class="flex items-center gap-2.5 px-3 py-1.5 text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg transition-colors opacity-60 cursor-not-allowed" title="Próximamente">
+                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                    Outputs
+                </a>
+                
+                <!-- Future Modules -->
+                <a href="#" class="flex items-center gap-2.5 px-3 py-1.5 text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg transition-colors opacity-60 cursor-not-allowed">
+                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                    Tasks
+                </a>
+                <a href="#" class="flex items-center gap-2.5 px-3 py-1.5 text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg transition-colors opacity-60 cursor-not-allowed">
+                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Reminders
+                </a>
+                <a href="#" class="flex items-center gap-2.5 px-3 py-1.5 text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg transition-colors opacity-60 cursor-not-allowed">
+                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    Routines
+                </a>
             </div>
 
-            <!-- 2. Context -->
+            <!-- Workspace Data (Restored original style) -->
             <div class="px-3 pt-6">
                 <button class="w-full flex items-center justify-between px-3 py-2 text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest group">
-                    <span>2. Context</span>
+                    <span>Workspace</span>
                 </button>
                 <div class="mt-1 space-y-0.5 px-2">
-                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors opacity-50 cursor-not-allowed" title="Próximamente">
-                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
-                        Projects
-                    </a>
                     
-                    <!-- Memory: Currently integrated Workspace Tree -->
+                    <!-- Projects -->
                     <div class="flex flex-col">
-                        <div class="flex items-center gap-2.5 px-3 py-2 text-sm font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50/50 dark:bg-emerald-900/10 rounded-lg">
-                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                            Memory
+                        <div class="flex items-center justify-between px-3 py-2 text-sm font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50/50 dark:bg-emerald-900/10 rounded-lg group">
+                            <div class="flex items-center gap-2.5">
+                                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                                Projects
+                            </div>
+                            <button onclick="promptCreateNode(false)" class="p-1 rounded bg-white dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 opacity-60 hover:opacity-100 hover:shadow-sm transition-all" title="Crear Nuevo Documento">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            </button>
                         </div>
                         <div class="pl-2 pr-1 pb-1 pt-1 ml-3 border-l-2 border-emerald-100 dark:border-emerald-900/40" id="tree-container">
-                            <div class="text-[11px] text-gray-400 italic px-3 py-2">Cargando memoria...</div>
+                            <div class="text-[11px] text-gray-400 italic px-3 py-2">Loading projects...</div>
                         </div>
                     </div>
 
-                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors opacity-50 cursor-not-allowed" title="Próximamente">
-                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-                        Chats
-                    </a>
-                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors opacity-50 cursor-not-allowed" title="Próximamente">
-                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"></path></svg>
-                        Plugins
-                    </a>
-                </div>
-            </div>
+                    <!-- Chats -->
+                    <div class="flex flex-col">
+                        <div class="flex flex-col gap-2 px-3 py-2 rounded-lg transition-colors mt-2">
+                            <div class="flex items-center gap-2.5 text-sm font-bold text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 cursor-pointer" onclick="toggleChat(true)">
+                                <svg class="w-4 h-4 shrink-0 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                                Chats
+                            </div>
+                        </div>
+                        <div class="pl-2 pr-1 pb-1 pt-1 ml-3 border-l-2 border-gray-100 dark:border-gray-800">
+                            <!-- Placeholder File -->
+                            <div class="flex items-center group cursor-pointer" data-chat-path="data/workspace/Chats/Ideas_para_Proyecto_React.md" onclick="openFile('data/workspace/Chats/Ideas_para_Proyecto_React.md')">
+                                <div class="w-4 h-px bg-gray-200 dark:bg-gray-700"></div>
+                                <div class="flex-1 flex items-center justify-between gap-2 px-2 py-1.5 text-xs text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-r-md transition-colors overflow-hidden">
+                                    <div class="flex items-center gap-2 truncate">
+                                        <svg class="w-3.5 h-3.5 opacity-50 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+                                        <span class="truncate font-medium">Ideas para React</span>
+                                    </div>
+                                    <div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+                                         <button onclick="event.stopPropagation(); promptRename('data/workspace/Chats/Ideas_para_Proyecto_React.md', 'Ideas_para_Proyecto_React.md')" class="p-1 hover:bg-emerald-200/50 dark:hover:bg-emerald-800/50 rounded text-gray-400 hover:text-emerald-600" title="Renombrar"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>
+                                         <button onclick="event.stopPropagation(); promptDelete('data/workspace/Chats/Ideas_para_Proyecto_React.md', 'Ideas_para_Proyecto_React.md')" class="p-1 hover:bg-red-100 dark:hover:bg-red-900/40 rounded text-gray-400 hover:text-red-500" title="Eliminar"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            <!-- 3. Operative -->
-            <div class="px-3 pt-6">
-                <button class="w-full flex items-center justify-between px-3 py-2 text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest group">
-                    <span>3. Operative</span>
-                </button>
-                <div class="mt-1 space-y-0.5 px-2">
-                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors opacity-50 cursor-not-allowed" title="Próximamente">
-                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
-                        Tasks
-                    </a>
-                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors opacity-50 cursor-not-allowed" title="Próximamente">
-                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        Reminders
-                    </a>
-                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors opacity-50 cursor-not-allowed" title="Próximamente">
-                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                        Routines
-                    </a>
-                </div>
-            </div>
+                    <!-- Skills -->
+                    <div class="flex flex-col">
+                        <div class="flex items-center justify-between px-3 py-2 text-sm font-bold text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 rounded-lg group mt-2 transition-colors cursor-pointer" onclick="toggleSection('skills-tree', 'icon-skills-tree', 'icon-skills-active')">
+                            <div class="flex items-center gap-2.5">
+                                <svg class="w-4 h-4 shrink-0 transition-transform rotate-90" id="icon-skills-tree" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                <svg class="w-4 h-4 shrink-0 -ml-1 text-emerald-500 hidden" id="icon-skills-active" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                Skills
+                            </div>
+                            <button class="p-0.5 rounded hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-400 opacity-0 group-hover:opacity-100 transition-all" title="Add Skill" onclick="event.stopPropagation(); alert('Adición de Skills próximamente')">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            </button>
+                        </div>
+                        <div class="pl-2 pr-1 pb-1 pt-1 ml-3 border-l-2 border-gray-100 dark:border-gray-800" id="skills-tree">
+                            
+                            <!-- Dummy Skill 1 -->
+                            <div class="flex items-center group cursor-pointer" onclick="alert('This will open the skill view')">
+                                <div class="w-4 h-px bg-gray-200 dark:bg-gray-700"></div>
+                                <div class="flex-1 flex items-center justify-between gap-2 px-2 py-1.5 text-xs text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-r-md transition-colors overflow-hidden">
+                                    <div class="flex items-center gap-2 truncate">
+                                        <svg class="w-3.5 h-3.5 opacity-50 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                        <span class="truncate font-medium text-emerald-600 dark:text-emerald-400">Python Expert</span>
+                                    </div>
+                                    <div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+                                         <button onclick="event.stopPropagation();" class="p-1 hover:bg-red-100 dark:hover:bg-red-900/40 rounded text-gray-400 hover:text-red-500" title="Eliminar"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
+                                    </div>
+                                </div>
+                            </div>
 
-            <!-- 4. Settings -->
-            <div class="px-3 pt-6 pb-6">
-                <button class="w-full flex items-center justify-between px-3 py-2 text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest group">
-                    <span>4. Settings</span>
-                </button>
-                <div class="mt-1 space-y-0.5 px-2">
-                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors opacity-50 cursor-not-allowed" title="Próximamente">
-                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
-                        Providers
-                    </a>
-                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors opacity-50 cursor-not-allowed" title="Próximamente">
-                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
-                        Models
-                    </a>
-                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors opacity-50 cursor-not-allowed" title="Próximamente">
-                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                        Security
-                    </a>
-                    <a href="javascript:void(0)" onclick="openSettings()" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors" title="Mantenimiento de Sistema">
-                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
-                        Updates
-                    </a>
+                            <!-- Dummy Skill 2 -->
+                            <div class="flex items-center group cursor-pointer" onclick="alert('This will open the skill view')">
+                                <div class="w-4 h-px bg-gray-200 dark:bg-gray-700"></div>
+                                <div class="flex-1 flex items-center justify-between gap-2 px-2 py-1.5 text-xs text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-r-md transition-colors overflow-hidden">
+                                    <div class="flex items-center gap-2 truncate">
+                                        <svg class="w-3.5 h-3.5 opacity-50 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                        <span class="truncate font-medium">UX/UI Design Pattern</span>
+                                    </div>
+                                    <div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+                                         <button onclick="event.stopPropagation();" class="p-1 hover:bg-red-100 dark:hover:bg-red-900/40 rounded text-gray-400 hover:text-red-500" title="Eliminar"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Dummy Skill 3 -->
+                            <div class="flex items-center group cursor-pointer" onclick="alert('This will open the skill view')">
+                                <div class="w-4 h-px bg-gray-200 dark:bg-gray-700"></div>
+                                <div class="flex-1 flex items-center justify-between gap-2 px-2 py-1.5 text-xs text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-r-md transition-colors overflow-hidden">
+                                    <div class="flex items-center gap-2 truncate">
+                                        <svg class="w-3.5 h-3.5 opacity-50 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                        <span class="truncate font-medium">Blogging Formatting</span>
+                                    </div>
+                                    <div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+                                         <button onclick="event.stopPropagation();" class="p-1 hover:bg-red-100 dark:hover:bg-red-900/40 rounded text-gray-400 hover:text-red-500" title="Eliminar"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <!-- Bottom Actions (Memory Creation) -->
-
-        <div class="p-4 border-t border-gray-100 dark:border-gray-800 flex flex-col gap-2 shrink-0 bg-gray-50/50 dark:bg-gray-950/50">
-             <button onclick="promptCreateNode(true)" class="w-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center justify-center gap-2 border border-gray-200 dark:border-gray-700">
-                 <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path></svg>
-                 Nueva Sección
-             </button>
-             <button onclick="promptCreateNode(false)" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white py-2 rounded-lg text-sm font-semibold shadow-lg shadow-emerald-500/20 transition-all flex items-center justify-center gap-2">
-                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                 Nuevo Documento
-             </button>
+        <!-- Bottom Actions (Settings) -->
+        <div class="px-3 pb-4 pt-2 border-t border-gray-100 dark:border-gray-800 shrink-0 bg-white dark:bg-gray-900">
+            <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800/80 rounded-lg transition-colors">
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                Settings
+            </a>
         </div>
     </aside>
 
@@ -182,20 +221,199 @@ HTML_TEMPLATE = r"""
                     <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
                 </button>
                 <div class="h-6 w-px bg-gray-200 dark:bg-gray-800"></div>
-
-                <!-- Viewer Placeholder Toggle -->
-                <button onclick="openViewer()" class="p-2 text-gray-400 hover:text-emerald-500 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800" title="Alternar Vista de Documentos/Imágenes (Demo)">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
-                </button>
-                <div class="h-6 w-px bg-gray-200 dark:bg-gray-800"></div>
                 <button id="btn-save" onclick="saveCurrentFile()" class="bg-gray-900 dark:bg-emerald-500 text-white dark:text-gray-900 px-5 py-2 rounded-xl text-sm font-bold opacity-50 cursor-not-allowed transition-all shadow-md">Guardar</button>
             </div>
         </header>
 
-        <!-- Editor Area -->
-        <div class="flex-1 p-8 overflow-hidden bg-gray-50/30 dark:bg-gray-900/10">
-            <textarea id="markdown-editor" class="w-full max-w-4xl mx-auto block h-full bg-transparent text-gray-800 dark:text-gray-200 font-mono text-sm leading-relaxed focus:outline-none resize-none" spellcheck="false" placeholder="El archivo está vacío..." disabled></textarea>
+        <!-- Workspace App Area -->
+        <div class="flex-1 relative overflow-hidden flex bg-white dark:bg-[#191919] transition-colors duration-300">
+            
+            <!-- Home Dashboard View (New) -->
+            <div id="home-container" class="absolute inset-0 z-10 p-10 overflow-y-auto bg-white dark:bg-[#191919] transition-opacity duration-300">
+                <div class="max-w-5xl mx-auto w-full">
+                    <!-- Dynamic Greeting -->
+                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2 ml-2 mt-4" id="home-greeting">Good evening</h1>
+                    
+                    <!-- Projects / Recently visited -->
+                    <div class="mt-12">
+                        <div class="flex items-center gap-2 text-gray-500 mb-4 ml-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span class="text-sm font-medium">Projects Summary</span>
+                        </div>
+                        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4" id="home-projects-grid">
+                            <!-- Popular project cards overview -->
+                            <div class="bg-gray-50 hover:bg-gray-100 dark:bg-[#202020] dark:hover:bg-[#282828] rounded-2xl p-4 cursor-pointer transition-colors border border-transparent hover:border-gray-200 dark:hover:border-gray-700 h-36 flex flex-col justify-between group">
+                                <svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                <div>
+                                    <h3 class="text-sm font-bold text-gray-900 dark:text-gray-100 mb-1 truncate">Workspace Root</h3>
+                                    <p class="text-xs text-gray-500">Root folder</p>
+                                </div>
+                            </div>
+                            
+                            <div class="text-[13px] text-gray-400 italic col-span-full ml-2 mt-2">More projects will appear here...</div>
+                        </div>
+                    </div>
+
+                    <!-- Skills / Learn -->
+                    <div class="mt-12">
+                        <div class="flex items-center gap-2 text-gray-500 mb-4 ml-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                            <span class="text-sm font-medium">Skills & Knowledge</span>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="home-skills-grid">
+                            <!-- Skill Card Placeholder -->
+                            <div class="bg-gray-50 hover:bg-gray-100 dark:bg-[#202020] dark:hover:bg-[#282828] rounded-2xl p-5 cursor-pointer transition-colors border border-gray-100 dark:border-gray-800 h-48 flex flex-col items-center justify-center text-center group" onclick="alert('Feature in development')">
+                                <div class="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                                    <svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                                </div>
+                                <h3 class="text-sm font-bold text-gray-900 dark:text-gray-100">Add new skill</h3>
+                                <p class="text-[13px] text-gray-500 mt-1 max-w-[200px]">Create an AI skill to give the system new abilities.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Editor Area (Main View) -->
+            <div id="editor-container" class="absolute inset-0 z-0 p-8 overflow-y-auto bg-white dark:bg-[#191919] hidden">
+                <textarea id="markdown-editor" class="w-full max-w-4xl mx-auto block h-min min-h-full bg-transparent text-gray-800 dark:text-gray-200 font-mono text-sm leading-relaxed focus:outline-none resize-none" spellcheck="false" placeholder="El archivo está vacío..." disabled></textarea>
+            </div>
+
+            <!-- Global Search Modal Overlay (ChatGPT Style) -->
+            <div id="search-modal" class="absolute inset-0 z-50 bg-black/20 dark:bg-black/50 backdrop-blur-sm hidden items-start justify-center pt-[10vh]">
+                <div class="w-full max-w-[650px] bg-white dark:bg-[#212121] rounded-2xl shadow-2xl border border-gray-100 dark:border-white/10 overflow-hidden transform transition-all scale-95 opacity-0 flex flex-col max-h-[75vh]" id="search-modal-content">
+                    
+                    <!-- Search Input Area -->
+                    <div class="flex items-center p-3 px-5 border-b border-gray-100 dark:border-white/10 relative shrink-0">
+                        <input type="text" id="global-search-input" placeholder="Search chats..." class="w-full py-2 bg-transparent border-none focus:ring-0 text-[15px] font-medium text-gray-900 dark:text-white placeholder-gray-400 placeholder:font-normal" autocomplete="off">
+                        <button onclick="closeSearchModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors p-1" title="Close">
+                           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
+                    </div>
+
+                    <!-- Results Area (ChatGPT Layout) -->
+                    <div class="flex-1 overflow-y-auto p-3" id="search-results-container">
+                        
+                        <!-- New Chat Action -->
+                        <div class="flex items-center gap-3 px-3 py-3 mb-2 bg-gray-100 hover:bg-gray-200 dark:bg-[#2f2f2f] dark:hover:bg-[#383838] rounded-xl cursor-pointer transition-colors text-gray-800 dark:text-gray-200" onclick="alert('Creating new chat...')">
+                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                            <span class="text-sm font-medium">New chat</span>
+                        </div>
+
+                        <!-- Timeframe Group: Yesterday -->
+                        <div class="mt-4 mb-1 px-3">
+                            <span class="text-xs font-semibold text-gray-400 dark:text-gray-500">Yesterday</span>
+                        </div>
+                        <div class="flex flex-col gap-0.5">
+                            <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 dark:hover:bg-[#2f2f2f] cursor-pointer transition-colors group">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                                <span class="text-[14px] text-gray-700 dark:text-gray-300 font-medium truncate group-hover:text-gray-900 dark:group-hover:text-white">Organizando el siguiente paso</span>
+                            </div>
+                            <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 dark:hover:bg-[#2f2f2f] cursor-pointer transition-colors group">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                                <span class="text-[14px] text-gray-700 dark:text-gray-300 font-medium truncate group-hover:text-gray-900 dark:group-hover:text-white">Resumen de manejo de software</span>
+                            </div>
+                            <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 dark:hover:bg-[#2f2f2f] cursor-pointer transition-colors group">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                                <span class="text-[14px] text-gray-700 dark:text-gray-300 font-medium truncate group-hover:text-gray-900 dark:group-hover:text-white">Frases célebres motivadoras</span>
+                            </div>
+                        </div>
+
+                        <!-- Timeframe Group: Previous 7 Days -->
+                        <div class="mt-4 mb-1 px-3">
+                            <span class="text-xs font-semibold text-gray-400 dark:text-gray-500">Previous 7 Days</span>
+                        </div>
+                        <div class="flex flex-col gap-0.5">
+                            <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 dark:hover:bg-[#2f2f2f] cursor-pointer transition-colors group">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                                <span class="text-[14px] text-gray-700 dark:text-gray-300 font-medium truncate group-hover:text-gray-900 dark:group-hover:text-white">Avanzando proyectos juntos</span>
+                            </div>
+                            <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 dark:hover:bg-[#2f2f2f] cursor-pointer transition-colors group">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                                <span class="text-[14px] text-gray-700 dark:text-gray-300 font-medium truncate group-hover:text-gray-900 dark:group-hover:text-white">BlackCloud y el IDE</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Interface (Floating Widget) -->
+            <div id="chat-container" class="absolute top-4 right-4 bottom-4 w-[400px] z-50 flex flex-col bg-white dark:bg-[#191919] rounded-[24px] shadow-[0_12px_40px_-10px_rgba(0,0,0,0.15)] dark:shadow-[0_12px_40px_-10px_rgba(0,0,0,0.6)] border border-gray-200 dark:border-gray-800 transition-all duration-300 ease-in-out transform origin-top-right">
+                <div class="w-full flex flex-col h-full pt-6 pb-5 px-5">
+                    
+                    <!-- Chat Header -->
+                    <div class="flex items-center justify-between mb-8 w-full">
+                        <div class="flex items-center gap-1.5 cursor-pointer text-gray-500 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
+                            <span class="text-[13px] font-semibold">New AI chat</span>
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div class="flex items-center gap-1 text-gray-400">
+                            <button class="p-1 hover:bg-gray-100 dark:hover:bg-[#2c2c2c] rounded-md transition-colors" title="New Chat" onclick="toggleChat()">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                            </button>
+                            <button class="p-1 hover:bg-gray-100 dark:hover:bg-[#2c2c2c] rounded-md transition-colors" title="Resize/Popout" onclick="document.getElementById('chat-container').classList.toggle('w-[400px]'); document.getElementById('chat-container').classList.toggle('w-[600px]')">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+                            </button>
+                            <button class="p-1 hover:bg-gray-100 dark:hover:bg-[#2c2c2c] rounded-md transition-colors" title="Close AI" onclick="toggleChat()">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Chat Body & Suggestions -->
+                    <div class="flex-1 flex flex-col justify-start w-full">
+                        <!-- Avatar -->
+                        <div class="mb-5 flex items-center">
+                            <div class="w-[52px] h-[52px] rounded-full bg-[#f1f1f0] dark:bg-[#efefed] flex items-center justify-center relative shadow-sm border border-gray-200 dark:border-transparent">
+                                <!-- Minimal avatar drawing similar to Notion's -->
+                                <svg class="w-6 h-6 text-gray-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+                                <!-- Flower badge -->
+                                <div class="absolute -top-1 -right-1 text-pink-400">
+                                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2.2c-.4 0-.8.3-1 .6-.6-1.5-2.7-1.9-3.9-.6-.9.9-1.1 2.3-.5 3.4-1.4-.4-2.8 0-3.5 1.3-.7 1.2-.4 2.8.7 3.6-1.3.6-1.8 2.3-1.1 3.5.7 1.2 2.3 1.4 3.5.6-.6 1.4-.1 2.9 1 3.7 1.2.9 2.9.8 3.8-.4 1.2 1.3 3.3.9 4-.6.6 1.4 2.7 1.9 3.9.6.9-.9 1.1-2.3.5-3.4 1.4.4 2.8 0 3.5-1.3.7-1.2.4-2.8-.7-3.6 1.3-.6 1.8-2.3 1.1-3.5-.7-1.2-2.3-1.4-3.5-.6.6-1.4.1-2.9-1-3.7-1.2-.9-2.9-.8-3.8.4z"></path></svg>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h2 class="text-[22px] font-bold text-gray-900 dark:text-gray-100 mb-8 tracking-tight">What can I brighten up for you today?</h2>
+                    </div>
+
+                    <!-- Chat Input Container -->
+                    <div class="w-full mt-auto relative">
+                        <!-- Blue active ring wrapper -->
+                        <div class="border-[1.5px] border-emerald-500 rounded-[18px] p-3 shadow-lg bg-white dark:bg-[#202020] transition-all">
+                            
+                            <!-- Textarea -->
+                            <textarea class="w-full bg-transparent border-0 focus:ring-0 resize-none text-[15px] text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 p-0 mb-3" rows="1" placeholder="Habla con tu cerebro..."></textarea>
+                            
+                            <!-- Bottom Action Bar -->
+                            <div class="flex items-center justify-between">
+                                <!-- Left Actions (Settings/Personality only) -->
+                                <div class="flex items-center gap-2 text-gray-400">
+                                    <button class="p-1.5 hover:text-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 rounded-md transition-colors" title="Settings / Personality">
+                                        <!-- Sliders icon for settings/personality -->
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                                    </button>
+                                </div>
+                                
+                                <!-- Right Actions (Send) -->
+                                <div class="flex items-center">
+                                    <button class="w-8 h-8 rounded-full bg-gray-100 dark:bg-[#333] flex items-center justify-center text-gray-400 hover:text-white hover:bg-emerald-500 dark:hover:bg-emerald-500 transition-colors shadow-sm cursor-pointer" title="Enviar">
+                                        <svg class="w-4 h-4 translate-y-[-1px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        
+        <!-- Floating Chat Toggle Button (Visible when chat is closed) -->
+        <button onclick="toggleChat(true)" id="chat-toggle-btn" class="fixed bottom-6 right-6 w-14 h-14 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all hover:scale-105 z-40 hidden" title="Abrir Chat Assistant">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+        </button>
     </main>
 
     <!-- Modal Viewer (Placeholder) -->
@@ -401,7 +619,7 @@ HTML_TEMPLATE = r"""
         }
 
         function verifyCurrentFileExists() {
-            const exists = document.querySelector(`.file-node[data-path="${CSS.escape(currentFile)}"]`);
+            const exists = document.querySelector(`.file-node[data-path="${currentFile}"]`);
             if (!exists) {
                 const btnSave = document.getElementById('btn-save');
                 btnSave.textContent = "Eliminado";
@@ -562,6 +780,8 @@ HTML_TEMPLATE = r"""
                 currentFile = path;
                 document.getElementById('editor-title').innerHTML = generateBreadcrumb(path);
                 
+                showEditor(); // Ensure editor is visible when opening a file
+
                 const editor = document.getElementById('markdown-editor');
                 editor.value = data.content;
                 editor.disabled = false;
@@ -713,6 +933,21 @@ HTML_TEMPLATE = r"""
                     closeRenameModal();
                     await loadMemoryTree();
                     if (currentFile === path) openFile(data.path);
+                    
+                    // Update dummy chats if affected
+                    const chatItem = document.querySelector(`[data-chat-path="${path}"]`);
+                    if (chatItem) {
+                         chatItem.setAttribute('data-chat-path', data.path);
+                         chatItem.setAttribute('onclick', `openFile('${data.path}')`);
+                         const btns = chatItem.querySelectorAll('button');
+                         if(btns.length >= 2) {
+                             btns[0].setAttribute('onclick', `event.stopPropagation(); promptRename('${data.path}', '${safeName}')`);
+                             btns[1].setAttribute('onclick', `event.stopPropagation(); promptDelete('${data.path}', '${safeName}')`);
+                         }
+                         const textSpan = chatItem.querySelector('.truncate.font-medium');
+                         if(textSpan) textSpan.textContent = safeName;
+                    }
+                    
                     showToast("Renombrado exitosamente", "success");
                 } else {
                     const d = await res.json();
@@ -734,6 +969,27 @@ HTML_TEMPLATE = r"""
             document.getElementById('delete-modal').classList.add('hidden');
         }
 
+        function toggleChat(forceOpen = false) {
+            const chatContainer = document.getElementById('chat-container');
+            const toggleBtn = document.getElementById('chat-toggle-btn');
+            
+            if (chatContainer) {
+                if (forceOpen) {
+                    chatContainer.classList.remove('hidden');
+                    if (toggleBtn) toggleBtn.classList.add('hidden');
+                } else {
+                    const isHidden = chatContainer.classList.contains('hidden');
+                    if (isHidden) {
+                        chatContainer.classList.remove('hidden');
+                        if (toggleBtn) toggleBtn.classList.add('hidden');
+                    } else {
+                        chatContainer.classList.add('hidden');
+                        if (toggleBtn) toggleBtn.classList.remove('hidden');
+                    }
+                }
+            }
+        }
+
         async function submitDelete() {
             const path = document.getElementById('delete-path').value;
             try {
@@ -747,12 +1003,13 @@ HTML_TEMPLATE = r"""
                     closeDeleteModal();
                     await loadMemoryTree(true);
                     if (currentFile === path) {
-                        currentFile = null;
-                        document.getElementById('markdown-editor').value = '';
-                        document.getElementById('markdown-editor').disabled = true;
-                        document.getElementById('editor-title').innerHTML = '<span class="text-sm font-semibold text-gray-500 dark:text-gray-400">Selecciona un archivo</span>';
-                        document.getElementById('btn-save').classList.add('opacity-50', 'cursor-not-allowed');
+                        resetToChat();
                     }
+                    
+                    // Remove dummy chat if affected
+                    const chatItem = document.querySelector(`[data-chat-path="${path}"]`);
+                    if (chatItem) chatItem.remove();
+                    
                     showToast("Eliminado exitosamente", "success");
                 } else {
                     const d = await res.json();
@@ -958,7 +1215,85 @@ HTML_TEMPLATE = r"""
             }
         }
 
+        function showHome() {
+            document.getElementById('editor-container').classList.add('hidden');
+            document.getElementById('home-container').classList.remove('hidden');
+            setGreeting();
+        }
+
+        function showEditor() {
+            document.getElementById('home-container').classList.add('hidden');
+            document.getElementById('editor-container').classList.remove('hidden');
+        }
+
+        function setGreeting() {
+            const hour = new Date().getHours();
+            let greeting = 'Good morning';
+            if (hour >= 12 && hour < 17) greeting = 'Good afternoon';
+            else if (hour >= 17) greeting = 'Good evening';
+            document.getElementById('home-greeting').innerText = greeting;
+        }
+
+        // Toggle generic sections 
+        function toggleSection(sectionId, iconId, activeIconId) {
+            const el = document.getElementById(sectionId);
+            const icon = document.getElementById(iconId);
+            if(el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+                if(icon) icon.classList.add('rotate-90');
+            } else {
+                el.classList.add('hidden');
+                if(icon) icon.classList.remove('rotate-90');
+            }
+        }
+
+        /* --- Global Search Modal Logic --- */
+        function openSearchModal() {
+            const modal = document.getElementById('search-modal');
+            const content = document.getElementById('search-modal-content');
+            const input = document.getElementById('global-search-input');
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            // Animate in
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+                input.focus();
+            }, 10);
+        }
+
+        function closeSearchModal() {
+            const modal = document.getElementById('search-modal');
+            const content = document.getElementById('search-modal-content');
+            
+            // Animate out
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            
+            setTimeout(() => {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+                document.getElementById('global-search-input').value = ''; // clear on close
+            }, 200);
+        }
+
+        // Close search modal on Escape or clicking outside
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeSearchModal();
+            }
+        });
+
+        document.getElementById('search-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'search-modal') {
+                closeSearchModal();
+            }
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
+             setGreeting();
              loadMemoryTree();
              setInterval(() => loadMemoryTree(true), 3000);
         });
