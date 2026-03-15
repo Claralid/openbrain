@@ -51,12 +51,111 @@ HTML_TEMPLATE = r"""
             <span class="text-lg font-bold tracking-tight text-gray-900 dark:text-white">OpenBrain</span>
         </div>
 
-        <!-- Tree container -->
-        <div class="flex-1 overflow-y-auto p-4 space-y-1" id="tree-container">
-            <div class="text-sm text-gray-500 text-center mt-10">Cargando memoria...</div>
+        <!-- Scrollable Navigation Area -->
+        <div class="flex-1 overflow-y-auto w-full no-scrollbar pb-20">
+            <!-- 1. Personality -->
+            <div class="px-3 pt-4">
+                <button class="w-full flex items-center justify-between px-3 py-2 text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest group">
+                    <span>1. Personality</span>
+                </button>
+                <div class="mt-1 space-y-0.5 px-2">
+                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors opacity-50 cursor-not-allowed" title="Próximamente">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Identidad
+                    </a>
+                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors opacity-50 cursor-not-allowed" title="Próximamente">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+                        Tono
+                    </a>
+                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors opacity-50 cursor-not-allowed" title="Próximamente">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        Forma de ser
+                    </a>
+                </div>
+            </div>
+
+            <!-- 2. Context -->
+            <div class="px-3 pt-6">
+                <button class="w-full flex items-center justify-between px-3 py-2 text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest group">
+                    <span>2. Context</span>
+                </button>
+                <div class="mt-1 space-y-0.5 px-2">
+                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors opacity-50 cursor-not-allowed" title="Próximamente">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                        Projects
+                    </a>
+                    
+                    <!-- Memory: Currently integrated Workspace Tree -->
+                    <div class="flex flex-col">
+                        <div class="flex items-center gap-2.5 px-3 py-2 text-sm font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50/50 dark:bg-emerald-900/10 rounded-lg">
+                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                            Memory
+                        </div>
+                        <div class="pl-2 pr-1 pb-1 pt-1 ml-3 border-l-2 border-emerald-100 dark:border-emerald-900/40" id="tree-container">
+                            <div class="text-[11px] text-gray-400 italic px-3 py-2">Cargando memoria...</div>
+                        </div>
+                    </div>
+
+                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors opacity-50 cursor-not-allowed" title="Próximamente">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                        Chats
+                    </a>
+                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors opacity-50 cursor-not-allowed" title="Próximamente">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"></path></svg>
+                        Plugins
+                    </a>
+                </div>
+            </div>
+
+            <!-- 3. Operative -->
+            <div class="px-3 pt-6">
+                <button class="w-full flex items-center justify-between px-3 py-2 text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest group">
+                    <span>3. Operative</span>
+                </button>
+                <div class="mt-1 space-y-0.5 px-2">
+                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors opacity-50 cursor-not-allowed" title="Próximamente">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                        Tasks
+                    </a>
+                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors opacity-50 cursor-not-allowed" title="Próximamente">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Reminders
+                    </a>
+                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors opacity-50 cursor-not-allowed" title="Próximamente">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                        Routines
+                    </a>
+                </div>
+            </div>
+
+            <!-- 4. Settings -->
+            <div class="px-3 pt-6 pb-6">
+                <button class="w-full flex items-center justify-between px-3 py-2 text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest group">
+                    <span>4. Settings</span>
+                </button>
+                <div class="mt-1 space-y-0.5 px-2">
+                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors opacity-50 cursor-not-allowed" title="Próximamente">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                        Providers
+                    </a>
+                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors opacity-50 cursor-not-allowed" title="Próximamente">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        Models
+                    </a>
+                    <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors opacity-50 cursor-not-allowed" title="Próximamente">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        Security
+                    </a>
+                    <a href="javascript:void(0)" onclick="openSettings()" class="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 rounded-lg transition-colors" title="Mantenimiento de Sistema">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                        Updates
+                    </a>
+                </div>
+            </div>
         </div>
         
-        <!-- Bottom Actions -->
+        <!-- Bottom Actions (Memory Creation) -->
+
         <div class="p-4 border-t border-gray-100 dark:border-gray-800 flex flex-col gap-2 shrink-0 bg-gray-50/50 dark:bg-gray-950/50">
              <button onclick="promptCreateNode(true)" class="w-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center justify-center gap-2 border border-gray-200 dark:border-gray-700">
                  <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path></svg>
@@ -83,11 +182,10 @@ HTML_TEMPLATE = r"""
                     <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
                 </button>
                 <div class="h-6 w-px bg-gray-200 dark:bg-gray-800"></div>
-                <button onclick="openAgentSettings()" class="p-2 text-gray-400 hover:text-emerald-500 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800" title="Configurar Agente de Memoria">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"></path></svg>
-                </button>
-                <button onclick="openSettings()" class="p-2 text-gray-400 hover:text-emerald-500 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800" title="Mantenimiento del Sistema">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+
+                <!-- Viewer Placeholder Toggle -->
+                <button onclick="openViewer()" class="p-2 text-gray-400 hover:text-emerald-500 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800" title="Alternar Vista de Documentos/Imágenes (Demo)">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
                 </button>
                 <div class="h-6 w-px bg-gray-200 dark:bg-gray-800"></div>
                 <button id="btn-save" onclick="saveCurrentFile()" class="bg-gray-900 dark:bg-emerald-500 text-white dark:text-gray-900 px-5 py-2 rounded-xl text-sm font-bold opacity-50 cursor-not-allowed transition-all shadow-md">Guardar</button>
@@ -99,6 +197,42 @@ HTML_TEMPLATE = r"""
             <textarea id="markdown-editor" class="w-full max-w-4xl mx-auto block h-full bg-transparent text-gray-800 dark:text-gray-200 font-mono text-sm leading-relaxed focus:outline-none resize-none" spellcheck="false" placeholder="El archivo está vacío..." disabled></textarea>
         </div>
     </main>
+
+    <!-- Modal Viewer (Placeholder) -->
+    <div id="viewer-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-[60] hidden flex items-center justify-center p-4">
+        <div class="bg-gray-50 dark:bg-gray-950 rounded-2xl w-full h-[90vh] shadow-2xl border border-gray-200 dark:border-gray-800 transform transition-all flex flex-col overflow-hidden relative">
+            
+            <!-- Viewer Topbar -->
+            <div class="h-14 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between px-4 bg-white/50 dark:bg-gray-900/50">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-900/20 text-indigo-500 flex items-center justify-center shrink-0 border border-indigo-100 dark:border-indigo-900/50">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                    </div>
+                    <div>
+                        <span class="block text-sm font-bold text-gray-900 dark:text-white leading-tight">Document Viewer</span>
+                        <span class="block text-xs text-gray-500">Preview Mode</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button class="px-3 py-1.5 text-xs font-bold bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition" disabled>Download</button>
+                    <button onclick="closeViewer()" class="p-1.5 text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Viewer Canvas -->
+            <div class="flex-1 overflow-auto p-8 flex items-center justify-center bg-gray-100/50 dark:bg-black/20" id="viewer-canvas">
+                <div class="text-center w-full max-w-sm">
+                    <div class="w-20 h-20 bg-gray-200 dark:bg-gray-800 rounded-2xl mx-auto flex items-center justify-center mb-6 border border-gray-300 dark:border-gray-700 shadow-inner">
+                        <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">Editor de Recursos</h4>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Este es el espacio destinado al Viewer de imágenes y documentos nativo de OpenBrain. Integración lógica próxima.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Modal Nuevo Nodo -->
     <div id="create-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
@@ -655,6 +789,15 @@ HTML_TEMPLATE = r"""
             document.documentElement.classList.add('dark');
         } else {
             document.documentElement.classList.remove('dark');
+        }
+
+        // Viewer logic (Placeholder UI)
+        function openViewer() {
+            document.getElementById('viewer-modal').classList.remove('hidden');
+        }
+
+        function closeViewer() {
+            document.getElementById('viewer-modal').classList.add('hidden');
         }
 
         async function openAgentSettings() {

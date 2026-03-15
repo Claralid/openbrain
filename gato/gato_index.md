@@ -1,4 +1,0 @@
-# Gato
-
-
-- [gatito](./gatito.md)
