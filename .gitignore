@@ -45,3 +45,5 @@ python-portable/
 .agent/
 brain/
 *.log
+*.tmp
+*.txt
